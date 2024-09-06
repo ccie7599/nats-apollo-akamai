@@ -122,7 +122,10 @@ When you are done editing, hit *`Esc`* on your keyboard, then *`:`* then *`x`* a
 ***Note: that is a lower case x - case is important!*** </br>
 ### Step 5 - Review and Select Instances
 You may also want to change your instance sizing. Current instances types can be pulled from the API with the following command: </br>
-`curl https://api.linode.com/v4/linode/types | jq .data[].id` </br>
+```
+curl https://api.linode.com/v4/linode/types | jq .data[].id`
+```
+</br>
 The default we will use in this exercise are the `g6-standard-2` These are shared instances with 1 vCPU and 2 GB of RAM. </br>
 These should suffice for demonstration purposes, but are not suited for most production workloads. </br>
 If you decide you want larger instances you can edit the `main.tf` file: </br>
