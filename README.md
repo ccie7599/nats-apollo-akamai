@@ -102,7 +102,7 @@ An alternate method is to place this in the `terraform.tfvars` file - but that w
 You should already be in the repo directory - but just make sure with `pwd` </br>
 This should echo back /home/ followed by your login ID /edgenativeworkshop </br>
 It should look like this:
-`brent@localhost:/home/brent/edgenativeworkshop# pwd` </br>
+`brent@localhost:/home/brent/edgenativeworkshop$ pwd` </br>
 `/home/brent/edgenativeworkshop` </br>
 </br>
 Now before starting the build process, decide on the regions to be used </br>
