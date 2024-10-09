@@ -63,7 +63,7 @@ resource "linode_instance" "linode" {
   image       = "linode/ubuntu24.04"
   tags        = toset([var.userid])
   authorized_keys = [local.sanitized_ssh_key]
-  stackscript_id = 1458080
+  stackscript_id = 1487151
 }
 resource "linode_firewall" "nats_firewall" {
   label = "${var.userid}-nats_workshop_firewall"
