@@ -178,18 +178,7 @@ resource "null_resource" "copy_files" {
   }
   depends_on = [linode_instance.linode, null_resource.create-invs, linode_firewall.nats_firewall]
 }
-resource "null_resource" "connector" {
-  connection {
-    type = "ssh"
-    host = local.osaka_ip_address[0]
-    user = "root"
-    private_key = file("/home/${var.userid}/.ssh/id_rsa")
-  }
-  provisioner "remote-exec" {
-    inline = [
-      "docker run -d --restart always --add-host host.docker.internal:172.17.0.1 --name connector -m 1024m brianapley/redis-nats",
-    ]
-  }
+
   depends_on = [linode_instance.linode, null_resource.create-invs]
 }
 resource "null_resource" "create_gtm_tf" {
