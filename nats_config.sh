@@ -22,13 +22,7 @@ authorization: {
 # Enable JetStream 
 jetstream: true 
 http_port: 8222 
-websocket {   
-  listen: "0.0.0.0:8888"   
-  tls {     
-    cert_file: "/etc/fullchain.pem"
-    key_file: "/etc/privkey.pem"   
-  } 
-} 
+
 # Routes for cluster communication 
 cluster {
   listen: "0.0.0.0:6222"  
