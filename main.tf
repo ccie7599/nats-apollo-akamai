@@ -132,7 +132,7 @@ resource "null_resource" "copy_files" {
     type = "ssh"
     host = local.all_ip_addresses[count.index]
     user = "root"
-    private_key = file("/home/${var.userid}/.ssh/id_rsa")
+    private_key = file("/${var.userid}/.ssh/id_rsa")
   }
   provisioner "file" {
     source = "/etc/fullchain.pem"
