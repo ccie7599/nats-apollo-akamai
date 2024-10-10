@@ -47,7 +47,7 @@ locals {
 }
 
 data "local_file" "ssh_key" {
-  filename = "/home/${var.userid}/.ssh/id_rsa.pub"
+  filename = "/${var.userid}/.ssh/id_rsa.pub"
 }
 
 locals {
