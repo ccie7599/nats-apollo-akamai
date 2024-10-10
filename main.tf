@@ -174,9 +174,6 @@ resource "null_resource" "copy_files" {
   }
   depends_on = [linode_instance.linode, null_resource.create-invs, linode_firewall.nats_firewall]
 }
-
-  depends_on = [linode_instance.linode, null_resource.create-invs]
-}
 resource "null_resource" "create_gtm_tf" {
   triggers = {
     instance_ids = join(",", linode_instance.linode.*.id)
