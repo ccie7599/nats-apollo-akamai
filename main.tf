@@ -72,7 +72,7 @@ resource "linode_firewall" "nats_firewall" {
     label    = "allow-https"
     action   = "ACCEPT"
     protocol = "TCP"
-    ports    = "443, 8888, 8443"
+    ports    = "443, 8888, 8443, 8444, 8445"
     ipv4     = local.cleaned_cidrs
     ipv6     = local.cleaned_ipv6_cidrs
   }
