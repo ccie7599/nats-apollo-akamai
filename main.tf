@@ -47,7 +47,7 @@ locals {
 }
 
 data "local_file" "ssh_key" {
-  filename = "/${var.userid}/.ssh/id_rsa.pub"
+  filename = "/root/.ssh/id_rsa.pub"
 }
 
 locals {
@@ -132,7 +132,7 @@ resource "null_resource" "copy_files" {
     type = "ssh"
     host = local.all_ip_addresses[count.index]
     user = "root"
-    private_key = file("/${var.userid}/.ssh/id_rsa")
+    private_key = file("/root/.ssh/id_rsa")
   }
   provisioner "file" {
     source = "/etc/fullchain.pem"
