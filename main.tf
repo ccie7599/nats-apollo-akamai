@@ -117,12 +117,13 @@ resource "null_resource" "generate_prometheus_targets" {
       echo "  static_configs:" >> $output_file
       ips="${join(" ", flatten(linode_instance.linode[*].ipv4))}"
       for ip in $ips; do
-        echo "    - targets: ['${ip}:7777']" >> $output_file
+        echo "    - targets: ['\${ip}:7777']" >> $output_file
       done
     EOT
   }
   depends_on = [linode_instance.linode]
 }
+
 
 
 locals {
