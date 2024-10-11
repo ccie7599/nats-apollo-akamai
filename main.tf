@@ -117,7 +117,7 @@ resource "null_resource" "generate_prometheus_targets" {
       echo "  static_configs:" >> $output_file
 
       # Capture IP addresses from Terraform output
-      ips='${join(" ", [for vm in linode_instance.linode : vm.ipv4[0]])}'
+      ips='${join(" ", [for vm in linode_instance.linode : tostring(vm.ipv4)])}'
       
       # Loop through IPs and append to Prometheus scrape config
       for ip in $ips; do
@@ -127,6 +127,7 @@ resource "null_resource" "generate_prometheus_targets" {
   }
   depends_on = [linode_instance.linode]
 }
+
 
 
 
