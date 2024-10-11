@@ -102,11 +102,11 @@ output "ip_address" {
 }
 
 locals {
-  all_ip_addresses = [for vm in linode_instance.linode : "${vm.ipv4}"]
+  all_ip_addresses_prom = [for vm in linode_instance.linode : "${vm.ipv4}"]
 }
 
 output "all_ip_addresses_prom" {
-  value = local.all_ip_addresses
+  value = local.all_ip_addresses_prom
 }
 
 # Add the new resource to generate the Prometheus scrape targets
