@@ -102,38 +102,6 @@ output "ip_address" {
 }
 
 locals {
-  all_ip_addresses_prom = [for vm in linode_instance.linode : "${vm.ipv4}"]
-}
-
-output "all_ip_addresses_prom" {
-  value = local.all_ip_addresses_prom
-}
-
-resource "null_resource" "generate_prometheus_targets" {
-  provisioner "local-exec" {
-    command = <<EOT
-      output_file="${path.module}/prometheus_scrape_targets.yml"
-      echo "- job_name: 'nats-server'" > $output_file
-      echo "  static_configs:" >> $output_file
-
-      # Capture IP addresses from Terraform output
-      ips='${join(" ", [for vm in linode_instance.linode : tostring(vm.ipv4)])}'
-      
-      # Loop through IPs and append to Prometheus scrape config
-      for ip in $ips; do
-        echo "    - targets: ['$${ip}:7777']" >> $output_file
-      done
-    EOT
-  }
-  depends_on = [linode_instance.linode]
-}
-
-
-
-
-
-
-locals {
   ip_address = [for vm in linode_instance.linode : "${vm.ipv4}"]
   jp_osa_ip_address = [for vm in linode_instance.linode : vm.ipv4 if vm.region == "jp-osa"]
   osaka_ip_address = flatten([for vm in linode_instance.linode : vm.ipv4 if vm.region == "jp-osa"])
