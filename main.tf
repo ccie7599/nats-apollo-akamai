@@ -170,7 +170,7 @@ resource "null_resource" "copy_files" {
       "echo 'fi' >> /root/start-docker.sh",
       "echo 'if [ ! $(docker ps -q -f name=nats-apollo-query) ]; then' >> /root/start-docker.sh",
       "echo '  echo \"Starting nats-apollo-query...\"' >> /root/start-docker.sh",
-      "echo '  docker run -d --restart always --add-host host.docker.internal:172.17.0.1 --name prometheus-nats-exporter -m 512m -p 7777:7777 natsio/prometheus-nats-exporter:latest -use_internal_server_id -use_internal_server_name -jsz all -replicatorVarz -routez -serverz -healthz -gatewayz -accstatz -leafz -channelz -connz_detailed -varz http://172.17.0.1:8222 ' >> /root/start-docker.sh",
+      "echo '  docker run -d --restart always --add-host host.docker.internal:172.17.0.1 --name prometheus-nats-exporter -m 512m -p 7777:7777 natsio/prometheus-nats-exporter:latest -use_internal_server_id -use_internal_server_name -jsz all -routez -serverz -healthz -gatewayz -accstatz -leafz -channelz -connz_detailed -varz http://172.17.0.1:8222 ' >> /root/start-docker.sh",
       "echo 'fi' >> /root/start-docker.sh",
       "chmod +x /root/start-docker.sh",
       "./start-docker.sh",
