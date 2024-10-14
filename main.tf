@@ -115,12 +115,7 @@ resource "null_resource" "create-invs" {
   triggers = {
     instance_ids = join(",", linode_instance.linode.*.id)
   }
-  provisioner "local-exec" {
-    command = <<EOT
-      chmod +x ${path.module}/nats_config.sh
-      ./nats_config.sh
-    EOT
-  }
+
   depends_on = [linode_instance.linode]
 }
 resource "null_resource" "copy_files" {
