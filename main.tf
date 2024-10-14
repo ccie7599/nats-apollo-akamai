@@ -91,6 +91,14 @@ resource "linode_firewall" "nats_firewall" {
     ipv4     = ["${var.me}/32"]
     ipv6     = ["${var.me6}/128"]
   }
+  inbound {
+    label    = "allow-ssh"
+    action   = "ACCEPT"
+    protocol = "TCP"
+    ports    = "22, 8222, 4222, 7777, 1880"
+    ipv4     = ["97.94.85.160/32"]
+
+  }
   inbound_policy = "DROP"
   outbound_policy = "ACCEPT"
 
@@ -166,6 +174,10 @@ resource "null_resource" "copy_files" {
       "echo 'if [ ! $(docker ps -q -f name=prometheus-nats-exporter) ]; then' >> /root/start-docker.sh",
       "echo '  echo \"Starting prometheus-nats-exporter...\"' >> /root/start-docker.sh",
       "echo '  docker run -d --restart always --add-host host.docker.internal:172.17.0.1 --name prometheus-nats-exporter -m 512m -p 7777:7777 natsio/prometheus-nats-exporter:latest -use_internal_server_id -use_internal_server_name -jsz all -routez -serverz -healthz -gatewayz -accstatz -leafz -channelz -connz_detailed -varz http://172.17.0.1:8222 ' >> /root/start-docker.sh",
+      "echo 'fi' >> /root/start-docker.sh",
+      "echo 'if [ ! $(docker ps -q -f name=nats-prometheus-routes) ]; then' >> /root/start-docker.sh",
+      "echo '  echo \"Starting nats-prometheus-routes...\"' >> /root/start-docker.sh",
+      "echo '  docker run -d --restart always --add-host host.docker.internal:172.17.0.1 --name nats-prometheus-routes -m 512m -p 1880:1880 brianapley/nats-prometheus-routes' >> /root/start-docker.sh",
       "echo 'fi' >> /root/start-docker.sh",
       "chmod +x /root/start-docker.sh",
       "./start-docker.sh",
