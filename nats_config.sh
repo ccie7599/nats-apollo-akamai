@@ -23,6 +23,11 @@ authorization: {
 jetstream: true 
 http_port: 8222 
 
+mqtt {
+  listen: "0.0.0.0:1883"  # MQTT listen port
+  no_auth_user: testuser
+}
+
 # Routes for cluster communication 
 cluster {
   listen: "0.0.0.0:6222"  
